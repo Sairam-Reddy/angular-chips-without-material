@@ -42,7 +42,7 @@ export class AppComponent implements ControlValueAccessor {
     if (this.searchTerm.length > 0) {
       this.querySearchResults();
     } else {
-      this.reset();
+      this.searchResults = [];
     }
   }
 
