@@ -23,12 +23,11 @@
     autocomplete="on"
     placeholder="Type a Programming Language"
     list="items"
-    (click)="focusSearch()"
   />
 	</div>
 		</div>
 
-		<div *ngIf="showResults" class="search__panel">
+		<div *ngIf="searchResults.length > 0" class="search__panel">
 			<div *ngFor="let item of searchResults" class="result-item" (click)="addItem(item)">
 				{{item}}
 			</div>

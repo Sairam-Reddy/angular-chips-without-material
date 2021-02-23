@@ -27,7 +27,6 @@ export class AppComponent implements ControlValueAccessor {
     "PHP"
   ];
   public searchResults: Array<string> = [];
-  public showResults: boolean = false;
 
   public get searchQuery(): string {
     return this.searchTerm;
@@ -35,14 +34,9 @@ export class AppComponent implements ControlValueAccessor {
 
   public set searchQuery(updatedString: string) {
     this.searchTerm = updatedString;
-    this.searchResults = this.items.filter((x: string) =>
-      x.toLowerCase().startsWith(this.searchTerm.toLowerCase())
-    );
-  }
-
-  public focusSearch(): void {
-    this.showResults = true;
-    this.reset();
+    if (this.searchTerm.length > 0) {
+      this.querySearchResults();
+    }
   }
 
   public removeItem(value: string): void {
@@ -52,7 +46,6 @@ export class AppComponent implements ControlValueAccessor {
     if (index !== -1) {
       this.selectedItems.splice(index, 1);
     }
-    this.reset();
   }
 
   public addItem(value: string): void {
@@ -61,15 +54,20 @@ export class AppComponent implements ControlValueAccessor {
     );
     if (index === -1) {
       this.selectedItems.push(value);
+      this.searchQuery = "";
+      this.reset();
     }
-    this.reset();
+  }
+
+  private querySearchResults(): void {
+    this.searchResults = this.items.filter(
+      (x: string) =>
+        x.toLowerCase().startsWith(this.searchTerm.toLowerCase()) &&
+        !this.selectedItems.includes(x)
+    );
   }
 
   private reset(): void {
-    this.searchResults = this.getNonSelectedResults();
-  }
-
-  private getNonSelectedResults(): Array<string> {
-    return this.items.filter((x: string) => !this.selectedItems.includes(x));
+    this.searchResults = [];
   }
 }
