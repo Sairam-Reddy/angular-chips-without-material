@@ -17,8 +17,8 @@ export class AppComponent implements ControlValueAccessor {
 
   public registerOnTouched(fn: any): void {}
 
-  public item: string = "";
-  public selectedItems: Array<string> = ["Java"];
+  public searchTerm: string = "";
+  public selectedItems: Array<string> = [];
   public items: Array<string> = [
     "Java",
     "Angular",
@@ -28,6 +28,17 @@ export class AppComponent implements ControlValueAccessor {
   ];
   public searchResults: Array<string> = [];
   public showResults: boolean = false;
+
+  public get searchQuery(): string {
+    return this.searchTerm;
+  }
+
+  public set searchQuery(updatedString: string) {
+    this.searchTerm = updatedString;
+    this.searchResults = this.items.filter((x: string) =>
+      x.toLowerCase().startsWith(this.searchTerm.toLowerCase())
+    );
+  }
 
   public focusSearch(): void {
     this.showResults = true;
