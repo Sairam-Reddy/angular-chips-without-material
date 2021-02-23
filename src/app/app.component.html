@@ -28,8 +28,8 @@
 		</div>
 
 		<div *ngIf="searchResults.length > 0" class="search__panel">
-			<div *ngFor="let item of searchResults" tabIndex="-1" class="result-item" (click)="addItem(item)"
-				(keyup.enter)="addItem(item)">
+			<div *ngFor="let item of searchResults" tabIndex="0" role="button" aria-pressed="false" class="result-item"
+				(click)="addItem(item)" (keyup.enter)="addItem(item)">
 				{{item}}
 			</div>
 		</div>
