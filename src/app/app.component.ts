@@ -80,6 +80,15 @@ export class AppComponent implements ControlValueAccessor {
     }
   }
 
+  public focusResults(): void {
+    const searchpanel: any = this.elementRef.nativeElement.querySelector(
+      ".result-item"
+    );
+    if (searchpanel) {
+      searchpanel.focus();
+    }
+  }
+
   private querySearchResults(): void {
     this.searchResults = this.items.filter(
       (x: string) =>
