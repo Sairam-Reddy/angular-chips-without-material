@@ -1,4 +1,4 @@
-import { Component, VERSION } from "@angular/core";
+import { Component, ElementRef, VERSION } from "@angular/core";
 import { ControlValueAccessor } from "@angular/forms";
 
 @Component({
@@ -7,6 +7,7 @@ import { ControlValueAccessor } from "@angular/forms";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements ControlValueAccessor {
+  public constructor(private elementRef: ElementRef) {}
   public onChange: any;
 
   public writeValue(obj: any): void {}
@@ -49,6 +50,7 @@ export class AppComponent implements ControlValueAccessor {
     );
     if (index !== -1) {
       this.selectedItems.splice(index, 1);
+      this.focusInput();
     }
   }
 
@@ -58,8 +60,23 @@ export class AppComponent implements ControlValueAccessor {
     );
     if (index === -1) {
       this.selectedItems.push(value);
-      this.searchQuery = "";
       this.reset();
+      this.focusInput();
+    }
+  }
+
+  public removeLastItem(): void {
+    if (!this.searchTerm) {
+      this.selectedItems.splice(-1, 1);
+      this.focusInput();
+    }
+  }
+
+  public addFirstItem(): void {
+    if (this.searchResults.length === 1) {
+      this.selectedItems.push(this.searchResults[0]);
+      this.reset();
+      this.focusInput();
     }
   }
 
@@ -71,7 +88,17 @@ export class AppComponent implements ControlValueAccessor {
     );
   }
 
+  private focusInput(): void {
+    const inputData: any = this.elementRef.nativeElement.querySelector(
+      ".search-input__data"
+    );
+    if (inputData) {
+      inputData.focus();
+    }
+  }
+
   private reset(): void {
+    this.searchQuery = "";
     this.searchResults = [];
   }
 }

@@ -20,6 +20,8 @@
     class="search-input__data"
     [(ngModel)]="searchQuery"
     [placeholder]="searchPlaceholder"
+    (keydown.backspace)="removeLastItem()"
+    (keyup.enter)="addFirstItem()"
   />
 	</div>
 		</div>
