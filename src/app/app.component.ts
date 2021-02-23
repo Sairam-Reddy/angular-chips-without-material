@@ -28,6 +28,10 @@ export class AppComponent implements ControlValueAccessor {
   ];
   public searchResults: Array<string> = [];
 
+  public get searchPlaceholder(): string {
+    return this.searchTerm ? "" : "Type a Programming Language";
+  }
+
   public get searchQuery(): string {
     return this.searchTerm;
   }
