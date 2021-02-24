@@ -33,6 +33,7 @@ export class ChipsComponent implements ControlValueAccessor {
   >();
 
   public onChange: any;
+
   public registerOnChange(fn: any): void {
     this.onChange = fn;
   }
