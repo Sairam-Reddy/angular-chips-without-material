@@ -126,17 +126,17 @@ export class ChipsComponent implements ControlValueAccessor {
   public onLocationFocus(): void {
     this.focusElement = 0;
   }
-  onLocationBlur() {
+  public onLocationBlur(): void {
     this.focusElement = -1;
   }
 
-  onArrowUp() {
+  public onArrowUp(): void {
     if (this.focusElement > 0) {
       this.focusElement--;
     }
   }
 
-  onArrowDown() {
+  public onArrowDown(): void {
     if (this.focusElement <= this.searchResults.length - 2) {
       this.focusElement++;
     } else {
