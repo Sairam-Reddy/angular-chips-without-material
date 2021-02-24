@@ -18,7 +18,7 @@ export class AppComponent {
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
-      chips: ["Java"]
+      chips: fb.array(["Java"])
     });
   }
 }
