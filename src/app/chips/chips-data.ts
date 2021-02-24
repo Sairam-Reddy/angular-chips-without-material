@@ -1,4 +1,4 @@
-export class Chips {
+export class ChipsData {
   public programmingLanguages: Array<string> = [
     "Java",
     "JavaScript",

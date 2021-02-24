@@ -10,10 +10,12 @@ import {
 import { AppComponent } from "./app.component";
 import { HelloComponent } from "./hello.component";
 import { ChipsComponent } from "./chips/chips.component";
+import { ChipsData } from "./chips/chips-data";
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   declarations: [AppComponent, ChipsComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [ChipsData]
 })
 export class AppModule {}

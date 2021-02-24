@@ -7,6 +7,7 @@ import {
   VERSION
 } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { ChipsData } from "./chips/chips-data";
 
 @Component({
   selector: "my-app",
@@ -15,8 +16,11 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 })
 export class AppComponent {
   public form: FormGroup;
+  public items: Array<string>;
 
-  constructor(fb: FormBuilder) {
+  public constructor(fb: FormBuilder, private data: ChipsData) {
+    this.items = data.programmingLanguages;
+
     this.form = fb.group({
       chips: fb.array([])
     });
