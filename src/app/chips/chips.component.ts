@@ -46,7 +46,7 @@ export class ChipsComponent implements ControlValueAccessor {
   ];
   public searchResults: Array<string> = [];
 
-  get values() {
+  get values(): Array<string> {
     return this.selectedItems;
   }
 
@@ -57,7 +57,7 @@ export class ChipsComponent implements ControlValueAccessor {
     }
   }
 
-  writeValue(value: any): void {
+  writeValue(value: Array<string>): void {
     this.values = value;
   }
 
