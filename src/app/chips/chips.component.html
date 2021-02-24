@@ -21,20 +21,22 @@
     [(ngModel)]="searchQuery"
     [placeholder]="searchPlaceholder"
     (keydown.backspace)="removeLastItem()"
-    (keyup.enter)="addFirstItem()"
+    (keyup.enter)="addCurrentItem()"
+    (focus)="onLocationFocus()"
+    (blur)="onLocationBlur()"
+    (keydown.ArrowUp)="onArrowUp()"
+    (keydown.ArrowDown)="onArrowDown()"
   />
 	</div>
 		</div>
 
 		<div *ngIf="searchResults.length > 0" class="search__panel">
 
-			<!-- <div *ngFor="let item of searchResults" class="result-item" (click)="addItem(item)"
-				(keyup.enter)="addItem(item)">
-				{{item}}
-			</div> -->
 
-			<ul role="listbox">
-				<li *ngFor="let item of searchResults" class="result-item" (click)="addItem(item)"
+
+			<ul role="listbox" class="result-items">
+				<li #element *ngFor="let item of searchResults; let i = index" tabIndex="{{i}}" class="result-item"
+					[ngClass]="{'result-item--focus': focusElement == element.tabIndex}" (click)="addItem(item)"
 					(keyup.enter)="addItem(item)">
 					{{item}}
 				</li>

@@ -48,6 +48,8 @@ export class ChipsComponent implements ControlValueAccessor {
 
   public searchResults: Array<string> = [];
 
+  public focusElement: number = -1;
+
   get values(): Array<string> {
     return this.selectedItems;
   }
@@ -118,6 +120,34 @@ export class ChipsComponent implements ControlValueAccessor {
     );
     if (searchpanel) {
       searchpanel.focus();
+    }
+  }
+
+  onLocationFocus() {
+    this.focusElement = 0;
+  }
+  onLocationBlur() {
+    this.focusElement = -1;
+  }
+
+  onArrowUp() {
+    if (this.focusElement > 0) {
+      this.focusElement--;
+    }
+  }
+
+  onArrowDown() {
+    if (this.focusElement <= this.searchResults.length - 2) {
+      this.focusElement++;
+    } else {
+       this.focusElement = 0;
+    }
+  }
+
+  public addCurrentItem(): void {
+    if (this.focusElement >= 0) {
+      const currrentItem: string = this.searchResults[this.focusElement];
+      this.addItem(currrentItem);
     }
   }
 
