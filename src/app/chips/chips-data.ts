@@ -1,6 +1,8 @@
 export class Chips {
-
-  programmingLanguages: [
-    
-  ]
+  public programmingLanguages: Array<string> = [
+    "Java",
+    "JavaScript",
+    "Python",
+    "PHP"
+  ];
 }

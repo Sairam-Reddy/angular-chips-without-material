@@ -3,6 +3,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  Input,
   Output,
   VERSION
 } from "@angular/core";
@@ -23,6 +24,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 export class ChipsComponent implements ControlValueAccessor {
   public constructor(private elementRef: ElementRef) {}
 
+  @Input()
+  public items: Array<string> = [];
+
   @Output()
   public selectedItemsChange: EventEmitter<Array<string>> = new EventEmitter<
     Array<string>
@@ -32,18 +36,15 @@ export class ChipsComponent implements ControlValueAccessor {
   public registerOnChange(fn: any): void {
     this.onChange = fn;
   }
-
   public registerOnTouched(fn: any): void {}
+
+  writeValue(value: Array<string>): void {
+    this.values = value;
+  }
 
   public searchTerm: string = "";
   public selectedItems: Array<string> = [];
-  public items: Array<string> = [
-    "Java",
-    "Angular",
-    "JavaScript",
-    "Python",
-    "PHP"
-  ];
+
   public searchResults: Array<string> = [];
 
   get values(): Array<string> {
@@ -55,10 +56,6 @@ export class ChipsComponent implements ControlValueAccessor {
     if (this.onChange) {
       this.onChange(value);
     }
-  }
-
-  writeValue(value: Array<string>): void {
-    this.values = value;
   }
 
   public get searchPlaceholder(): string {
