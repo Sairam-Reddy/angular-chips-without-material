@@ -1,17 +1,34 @@
-import { Component, ElementRef, VERSION } from "@angular/core";
-import { ControlValueAccessor } from "@angular/forms";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Output,
+  VERSION
+} from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   selector: "my-app",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  styleUrls: ["./app.component.scss"],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AppComponent),
+      multi: true
+    }
+  ]
 })
 export class AppComponent implements ControlValueAccessor {
   public constructor(private elementRef: ElementRef) {}
+
+  @Output()
+  public selectedItemsChange: EventEmitter<Array<string>> = new EventEmitter<
+    Array<string>
+  >();
+
   public onChange: any;
-
-  public writeValue(obj: any): void {}
-
   public registerOnChange(fn: any): void {
     this.onChange = fn;
   }
@@ -28,6 +45,21 @@ export class AppComponent implements ControlValueAccessor {
     "PHP"
   ];
   public searchResults: Array<string> = [];
+
+  get values() {
+    return this.selectedItems;
+  }
+
+  set values(value: Array<string>) {
+    this.selectedItems = value;
+    if (this.onChange) {
+      this.onChange(value);
+    }
+  }
+
+  writeValue(value: any): void {
+    this.values = value;
+  }
 
   public get searchPlaceholder(): string {
     return this.searchTerm ? "" : "Type a Programming Language";
