@@ -123,7 +123,7 @@ export class ChipsComponent implements ControlValueAccessor {
     }
   }
 
-  onLocationFocus() {
+  public onLocationFocus(): void {
     this.focusElement = 0;
   }
   onLocationBlur() {
@@ -140,7 +140,7 @@ export class ChipsComponent implements ControlValueAccessor {
     if (this.focusElement <= this.searchResults.length - 2) {
       this.focusElement++;
     } else {
-       this.focusElement = 0;
+      this.focusElement = 0;
     }
   }
 

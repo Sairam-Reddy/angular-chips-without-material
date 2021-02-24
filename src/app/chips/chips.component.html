@@ -31,9 +31,6 @@
 		</div>
 
 		<div *ngIf="searchResults.length > 0" class="search__panel">
-
-
-
 			<ul role="listbox" class="result-items">
 				<li #element *ngFor="let item of searchResults; let i = index" tabIndex="{{i}}" class="result-item"
 					[ngClass]="{'result-item--focus': focusElement == element.tabIndex}" (click)="addItem(item)"
@@ -41,8 +38,5 @@
 					{{item}}
 				</li>
 			</ul>
-
-
 		</div>
-
 	</div>
