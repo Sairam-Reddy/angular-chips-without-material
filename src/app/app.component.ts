@@ -8,7 +8,7 @@ import {
   Output,
   VERSION
 } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { ChipsData } from "./chips/chips-data";
 
 @Component({
@@ -17,7 +17,7 @@ import { ChipsData } from "./chips/chips-data";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  public form: FormGroup;
+  public formControl: FormControl;
   public items: Array<string>;
 
   public constructor(
@@ -27,9 +27,7 @@ export class AppComponent implements OnInit {
   ) {
     // this.items = data.programmingLanguages;
 
-    this.form = fb.group({
-      chips: fb.array([])
-    });
+    this.formControl = new FormControl([]);
   }
 
   public ngOnInit(): void {

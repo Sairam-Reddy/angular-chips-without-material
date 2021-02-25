@@ -7,7 +7,11 @@ import {
   Output,
   VERSION
 } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR
+} from "@angular/forms";
 
 @Component({
   selector: "app-chips",
@@ -27,16 +31,16 @@ export class ChipsComponent implements ControlValueAccessor {
   @Input()
   public items: Array<string> = [];
 
+  @Input()
+  formControl: FormControl;
   @Output()
   public selectedItemsChange: EventEmitter<Array<string>> = new EventEmitter<
     Array<string>
   >();
 
-  public onChange: any;
+  public onChange: Function;
 
-  public registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
+  registerOnChange(fn: any): void {}
   public registerOnTouched(fn: any): void {}
 
   writeValue(value: Array<string>): void {

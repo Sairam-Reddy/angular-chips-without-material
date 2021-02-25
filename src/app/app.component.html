@@ -1,3 +1,2 @@
-<form [formGroup]="form">
-	<app-chips [items]="items" formControlName="chips"></app-chips>
-</form>
+<app-chips [items]="items" [formControl]="formControl"></app-chips>
+{{ formControl.value }}
